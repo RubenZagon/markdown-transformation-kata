@@ -5,39 +5,37 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
+import java.nio.file.Paths;
 
+import static java.nio.file.Files.deleteIfExists;
+import static java.nio.file.Files.readAllBytes;
 import static org.assertj.core.api.Assertions.assertThat;
 
 final class MarkdownCLIShould {
 
+    private final String RESOURCES_DIRECTORY = "src/test/resources/";
+    private final String OUTPUT_FILE = RESOURCES_DIRECTORY + "destination.md";
+    private final String INPUT_MARKDOWN_FILE = RESOURCES_DIRECTORY + "source.md";
+
     @Test
     void read_the_content_from_file_and_apply_a_transformation() {
-        String RESOURCES_DIRECTORY = "src/test/resources/";
-        String INPUT_MARKDOWN_FILE = RESOURCES_DIRECTORY + "source.md";
-        String OUTPUT_FILE = RESOURCES_DIRECTORY + "destination.md";
-        MarkdownCLI markdownCLI = new MarkdownCLI();
         writeFile(INPUT_MARKDOWN_FILE, "[visible text link](url)");
 
-        markdownCLI.execute(INPUT_MARKDOWN_FILE, OUTPUT_FILE);
+        new MarkdownCLI().execute(INPUT_MARKDOWN_FILE, OUTPUT_FILE);
 
-        String expected = readFile(OUTPUT_FILE);
-        assertThat(expected).isEqualTo("""
-                                               visible text link [^anchor1]
-                                                                                              
-                                               [^anchor1]: url or text
-                                               """);
+        assertThat(readFile(OUTPUT_FILE))
+                .isEqualTo("""
+                                   visible text link [^anchor1]
+                                                                                  
+                                   [^anchor1]: url or text
+                                   """);
     }
 
     @AfterEach
     void clean(){
-        String RESOURCES_DIRECTORY = "src/test/resources/";
-        String INPUT_MARKDOWN_FILE = RESOURCES_DIRECTORY + "source.md";
-        String OUTPUT_FILE = RESOURCES_DIRECTORY + "destination.md";
-        java.nio.file.Path path = java.nio.file.Paths.get(INPUT_MARKDOWN_FILE);
-        java.nio.file.Path path2 = java.nio.file.Paths.get(OUTPUT_FILE);
         try {
-            java.nio.file.Files.deleteIfExists(path);
-            java.nio.file.Files.deleteIfExists(path2);
+            deleteIfExists(Paths.get(INPUT_MARKDOWN_FILE));
+            deleteIfExists(Paths.get(OUTPUT_FILE));
         } catch (Exception e) {
             throw new RuntimeException("Error deleting the file: " + e.getMessage());
         }
@@ -45,7 +43,7 @@ final class MarkdownCLIShould {
 
     private String readFile(String path) {
         try {
-            return new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(path)));
+            return new String(readAllBytes(Paths.get(path)));
         } catch (Exception e) {
             throw new RuntimeException("Error reading the file: " + e.getMessage());
         }
