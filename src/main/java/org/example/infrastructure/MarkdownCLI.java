@@ -1,4 +1,7 @@
-package org.example;
+package org.example.infrastructure;
+
+import org.example.domain.MarkdownFormatter;
+import org.example.domain.valueObjects.MarkdownText;
 
 import java.io.FileWriter;
 

@@ -1,7 +1,7 @@
 package org.example.integration;
 
-import org.example.MarkdownCLI;
-import org.example.MarkdownFormatter;
+import org.example.infrastructure.MarkdownCLI;
+import org.example.domain.MarkdownFormatter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

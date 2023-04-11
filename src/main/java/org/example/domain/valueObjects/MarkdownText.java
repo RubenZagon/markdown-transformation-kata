@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain.valueObjects;
 
 public final class MarkdownText {
     private final String value;

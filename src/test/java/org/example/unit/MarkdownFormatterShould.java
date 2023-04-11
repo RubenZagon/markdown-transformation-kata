@@ -1,11 +1,9 @@
 package org.example.unit;
 
-import org.example.MarkdownFormatter;
-import org.example.MarkdownText;
-import org.junit.jupiter.api.Test;
+import org.example.domain.MarkdownFormatter;
+import org.example.domain.valueObjects.MarkdownText;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
