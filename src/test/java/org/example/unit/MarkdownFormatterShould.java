@@ -36,6 +36,10 @@ final class MarkdownFormatterShould {
                 Arguments.of(
                         "[this book](https://codigosostenible.com) and some other text\nand some other text line.",
                         "this book [^anchor1] and some other text\nand some other text line.\n\n[^anchor1]: https://codigosostenible.com\n"
+                ),
+                Arguments.of(
+                        "[link-1](url-1)[link-2](url-2)",
+                        "link-1 [^anchor1]link-2 [^anchor2]\n\n[^anchor1]: url-1\n[^anchor2]: url-2\n"
                 )
         );
     }
