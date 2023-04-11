@@ -28,7 +28,7 @@ final class MarkdownCLIShould {
                 .isEqualTo("""
                                    visible text link [^anchor1]
                                                                                   
-                                   [^anchor1]: url or text
+                                   [^anchor1]: url
                                    """);
     }
 
