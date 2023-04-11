@@ -18,7 +18,7 @@ public final class MarkdownText {
         return value.isEmpty();
     }
 
-    public Anchor getAnchors() {
+    public Anchor getAnchor() {
         //language=RegExp
         Pattern pattern = Pattern.compile("\\[(?<text>[^]]+)]\\((?<url>[^)]+)\\)");
         Matcher matcher = pattern.matcher(this.value());
