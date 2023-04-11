@@ -19,7 +19,7 @@ The syntax of a footnote is the following:
 ```
 visible text link [^anchor1]
 
-[^anchor1]: url or text 
+[^anchor1]: url 
 ```
 
 The goal is to make conversions like the following:

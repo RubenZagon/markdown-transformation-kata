@@ -27,7 +27,7 @@ final class MarkdownFormatterShould {
                 Arguments.of("", ""),
                 Arguments.of(
                         "[visible text link](url)",
-                        "visible text link [^anchor1]\n\n[^anchor1]: url or text\n"
+                        "visible text link [^anchor1]\n\n[^anchor1]: url\n"
                 ),
                 Arguments.of(
                         "[this book](https://codigosostenible.com)",
