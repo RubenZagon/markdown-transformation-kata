@@ -1,6 +1,7 @@
 package org.example.integration;
 
 import org.example.MarkdownCLI;
+import org.example.MarkdownFormatter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ final class MarkdownCLIShould {
     void read_the_content_from_file_and_apply_a_transformation() {
         writeFile(INPUT_MARKDOWN_FILE, "[visible text link](url)");
 
-        new MarkdownCLI().execute(INPUT_MARKDOWN_FILE, OUTPUT_FILE);
+        new MarkdownCLI(new MarkdownFormatter()).execute(INPUT_MARKDOWN_FILE, OUTPUT_FILE);
 
         assertThat(readFile(OUTPUT_FILE))
                 .isEqualTo("""

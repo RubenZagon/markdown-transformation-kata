@@ -3,15 +3,16 @@ package org.example;
 import java.io.FileWriter;
 
 public final class MarkdownCLI {
-    public MarkdownCLI() {}
+
+    private final MarkdownFormatter formatter;
+
+    public MarkdownCLI(MarkdownFormatter formatter) {
+        this.formatter = formatter;
+    }
 
     public void execute(String markdownFile, String outputFile) {
-        writeFile(outputFile, """
-                                               visible text link [^anchor1]
-                                                                                              
-                                               [^anchor1]: url or text
-                                               """);
-
+        MarkdownText markdownText = formatter.turnsLinksIntoFootnote(new MarkdownText(markdownFile));
+        writeFile(outputFile, markdownText.value());
     }
 
     private void writeFile(String path, String content) {
