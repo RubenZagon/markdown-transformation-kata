@@ -1,41 +1,22 @@
 package org.example.infrastructure;
 
+import org.example.domain.FileSystem;
 import org.example.domain.MarkdownFormatter;
 import org.example.domain.valueObjects.MarkdownText;
 
-import java.io.FileWriter;
-import java.nio.file.Paths;
-
-import static java.nio.file.Files.readAllBytes;
-
-public final class MarkdownCLI {
+public final class MarkdownCLI{
 
     private final MarkdownFormatter formatter;
+    private final FileSystem fileSystem;
 
-    public MarkdownCLI(MarkdownFormatter formatter) {
+    public MarkdownCLI(MarkdownFormatter formatter, LocalFileSystem fileSystem) {
         this.formatter = formatter;
+        this.fileSystem = fileSystem;
     }
 
-    public void execute(String sourceFile, String outputFile) {
-        MarkdownText markdownText = formatter.turnsLinksIntoFootnote(new MarkdownText(readFile(sourceFile)));
-        writeFile(outputFile, markdownText.value());
-    }
-
-    private String readFile(String path) {
-        try {
-            return new String(readAllBytes(Paths.get(path)));
-        } catch (Exception e) {
-            throw new RuntimeException("Error reading the file: " + e.getMessage());
-        }
-    }
-
-    private void writeFile(String path, String content) {
-        try {
-            FileWriter fileWriter = new FileWriter(path);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch (Exception e) {
-            throw new RuntimeException("Error writing the file: " + e.getMessage());
-        }
+    public void execute() {
+        MarkdownText rawMarkdownText = fileSystem.readMarkdownContent();
+        MarkdownText markdownText = formatter.turnsLinksIntoFootnote(rawMarkdownText);
+        fileSystem.persist(markdownText);
     }
 }
