@@ -8,4 +8,8 @@ public final class MarkdownText {
     public String value() {
         return value;
     }
+
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
 }
