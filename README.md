@@ -1,5 +1,10 @@
 # Markdown transformation kata
 
+## Solution proposal
+![schema-solution](.github/assets/schema-solution.png)
+
+## Introduction
+
 The goal is to implement a command line tool that takes a markdown file and returns another markdown file, applying certain transformations to the text.
 
 ```
