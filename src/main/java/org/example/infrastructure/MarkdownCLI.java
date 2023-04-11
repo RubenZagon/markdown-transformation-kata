@@ -9,7 +9,7 @@ public final class MarkdownCLI{
     private final MarkdownFormatter formatter;
     private final FileSystem fileSystem;
 
-    public MarkdownCLI(MarkdownFormatter formatter, LocalFileSystem fileSystem) {
+    public MarkdownCLI(MarkdownFormatter formatter, FileSystem fileSystem) {
         this.formatter = formatter;
         this.fileSystem = fileSystem;
     }
